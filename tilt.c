@@ -30,3 +30,20 @@ int tilt_line_left(int length,int *line)
   } 
   return 0;
 }
+
+int tilt_line_right(int length,int *line){
+  // make sure vector length is sensible
+  if (length<1||length>255) return -1;
+
+  int temp[length];
+  int i;
+  
+  for(i=0;i<length;i++){
+    temp[length-i]=line[i];
+  }
+  tilt_line_left(length,temp);
+  for(i=0;i<length;i++){
+    line[i]=temp[i];
+  }
+  return 0;
+}
