@@ -35,9 +35,9 @@ int tilt_line_right(int length,int *line){
   // make sure vector length is sensible
   if (length<1||length>255) return -1;
 
-  // slide tiles to the left
+  // slide tiles to the right
   int i,j,shift;
-  for (i=length;i>=0;i--){
+  for (i=length-1;i>=0;i--){
     shift=0;
     if(!line[i]){
       for(j=i-1;j>=0;j--){
