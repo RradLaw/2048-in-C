@@ -72,7 +72,9 @@ int test_tilt_right()
 int main(int argc,char **argv)
 {
   int e=0;
+  printf("Left tilting:\n");
   e|=test_tilt_left();
+  printf("\nRight tilting:\n");
   e|=test_tilt_right();
   return e;
 }
