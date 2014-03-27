@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#define srandom srand
 
 int main(int argc,char **argv)
 {
