@@ -51,7 +51,7 @@ int board_spawn_tile(int size,int **board){
       if(!board[x][y]){
         if (r) r--;
         else{
-          srand((x+1)*(y+1));
+          srand((x+1)*(y+1)*time(NULL));
           int random = rand()%2 +1;
           board[x][y]=2*(random);
           x=size;
