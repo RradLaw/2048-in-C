@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "2048.h"
+#include <time.h>
+#define srandom srand
 
 int **board_create(int size)
 {
@@ -44,21 +46,19 @@ int board_spawn_tile(int size,int **board){
     }
   }
   int r =rand() % (count-1);
-  printf("count = %d r = %d ",count,r);
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if(!board[x][y]){
-      if (r) r--;
-      else{
-        printf("x= %d y= %d\n",x,y);
-        srand((x+1)*(y+1));
-        int random = rand()%2 +1;
-        board[x][y]=2*(random);
-        x=size;
-        y=size;
+        if (r) r--;
+        else{
+          srand((x+1)*(y+1));
+          int random = rand()%2 +1;
+          board[x][y]=2*(random);
+          x=size;
+          y=size;
+        }
       }
     }
-  }
   }
   return 0;
 }
