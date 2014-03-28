@@ -36,17 +36,23 @@ int board_display(int size,int **board)
 
 int board_spawn_tile(int size,int **board){
   int count =0;
+  int x,y;
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if (!board[x][y]) count++;
     }
   }
   srand(time(NULL));
-  int r =rand % count--;
+  count--;
+  int r =rand() % count;
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if (r) r--;
-      else board[x][y]=2*(rand()%2)+2;
+      else {
+        int random = rand()%2 +1;
+        board[x][y]=2*(random);
+      }
     }
   }
+  return 0;
 }
