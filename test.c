@@ -67,7 +67,21 @@ int test_tilt_right()
   return e;
 }
 
-
+int test_board_spawn()
+{
+  int e =0;
+  int board_size=4;
+  int **board=board_create(board_size);
+  e|= board_spawn_tile(board_size,board);
+  printf("Spawn 1:\n");
+  board_display(board_size,board);
+  printf("spawn 2:\n");
+  //e|= board_spawn_tile(board_size,board);
+  //board_display(board_size,board);
+  //e|= board_spawn_tile(board_size,board);
+  //board_display(board_size,board);
+  return e;
+}
 
 int main(int argc,char **argv)
 {
@@ -76,5 +90,6 @@ int main(int argc,char **argv)
   e|=test_tilt_left();
   printf("\nRight tilting:\n");
   e|=test_tilt_right();
+  e|=test_board_spawn();
   return e;
 }
