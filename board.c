@@ -43,11 +43,13 @@ int board_spawn_tile(int size,int **board){
       if (!board[x][y]) count++;
     }
   }
-  int r =rand() % count--;
+  int r =rand() % count-1;
+  printf("count = %d r = %d ",count,r);
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if (r) r--;
-      else {
+      else if(!board[x][y]){
+        printf("x= %d y= %d\n",x,y);
         srand((x+1)*(y+1));
         int random = rand()%2 +1;
         board[x][y]=2*(random);
