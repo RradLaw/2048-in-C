@@ -25,7 +25,6 @@ board_spawn_tile(board_size,board);
     int action=read_input();
     switch(action) {
     case GO_LEFT:
-      int *line
       break;
     case GO_RIGHT:
       break;
