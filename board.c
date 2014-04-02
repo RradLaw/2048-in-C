@@ -59,7 +59,8 @@ int board_spawn_tile(int size,int **board){
       if (!board[x][y]) count++;
     }
   }
-  r = rand() % (count-1);
+  if(count){
+  r = rand() % (count);
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if(!board[x][y]){
@@ -74,5 +75,7 @@ int board_spawn_tile(int size,int **board){
       }
     }
   }
+}
+
   return 0;
 }
