@@ -19,6 +19,20 @@ int **board_create(int size)
   return board;
 }
 
+int **board_flip(int **board, int size){
+  if (size<1||size>255) return NULL;
+  if (!board) return NULL;
+  int **board_temp=board_create(size);
+  int x,y;
+  for(x=0;x<size;x++){
+    for(y=0;y<size;y++){
+      board_temp[x][y]=board[y][x];   
+    }
+  }
+  return board_temp;
+  
+}
+
 int board_display(int size,int **board)
 {
   // make sure size of board is sensible
@@ -39,13 +53,13 @@ int board_display(int size,int **board)
 int board_spawn_tile(int size,int **board){
   srand(time(NULL));
   int count = 0;
-  int x,y;
+  int x,y,r;
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if (!board[x][y]) count++;
     }
   }
-  int r =rand() % (count-1);
+  r = rand() % (count-1);
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if(!board[x][y]){
