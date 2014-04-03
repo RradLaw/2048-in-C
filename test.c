@@ -49,6 +49,8 @@ int test_tilt_left()
   e|=ttl_vector(0,0,1,1,NULL,2,0,0,0);
   e|=ttl_vector(4,0,1,1,NULL,4,2,0,0);
   e|=ttl_vector(2,0,1,1,NULL,2,2,0,0);
+  e|=ttl_vector(2,1,1,0,NULL,2,2,0,0);
+  e|=ttl_vector(1,1,2,0,NULL,2,2,0,0);
   return e;
 }
 
@@ -64,6 +66,7 @@ int test_tilt_right()
   e|=ttr_vector(1,1,0,0,NULL,0,0,0,2);
   e|=ttr_vector(1,1,0,4,NULL,0,0,2,4);
   e|=ttr_vector(1,1,0,2,NULL,0,0,2,2);
+  e|=ttl_vector(0,2,1,1,NULL,0,0,2,2);
   return e;
 }
 
@@ -103,6 +106,31 @@ int test_board_tilt()
   return e;
 }
 
+int test_final_board()
+{
+  int board_size=4;
+  int i;
+  int **board=board_create(board_size);
+board_spawn_tile(board_size,board);
+board_spawn_tile(board_size,board);
+  while(empty(board_size,board)){
+      board=board_flip(board,board_size);
+      for(i=0;i<board_size;i++) tilt_line_left(board_size,board[i]);
+      board=board_flip(board,board_size);
+      board_spawn_tile(board_size,board);
+      board=board_flip(board,board_size);
+      for(i=0;i<board_size;i++) tilt_line_right(board_size,board[i]);
+      board=board_flip(board,board_size);
+      board_spawn_tile(board_size,board);
+      for(i=0;i<board_size;i++) tilt_line_left(board_size,board[i]);
+      board_spawn_tile(board_size,board);
+      for(i=0;i<board_size;i++) tilt_line_right(board_size,board[i]);
+      board_spawn_tile(board_size,board);
+  }
+  board_display(4,board);
+  return 0;
+}
+
 int main(int argc,char **argv)
 {
   int e=0;
@@ -110,7 +138,8 @@ int main(int argc,char **argv)
   e|=test_tilt_left();
   printf("\nRight tilting:\n");
   e|=test_tilt_right();
-  e|=test_board_spawn();
-  e|=test_board_tilt();
+  e|=test_final_board();
+  //e|=test_board_spawn();
+  //e|=test_board_tilt();
   return e;
 }
