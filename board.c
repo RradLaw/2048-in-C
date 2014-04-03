@@ -50,15 +50,21 @@ int board_display(int size,int **board)
   return 0;
 }
 
-int board_spawn_tile(int size,int **board){
-  srand(time(NULL));
+int empty(int size, int**board){
   int count = 0;
-  int x,y,r;
+  int x,y;
   for(y=0;y<size;y++) {    
     for(x=0;x<size;x++) {
       if (!board[x][y]) count++;
     }
   }
+  return count;
+}
+
+int board_spawn_tile(int size,int **board){
+  srand(time(NULL));
+  int count,x,y,r;
+  count = empty(size,board);
   if(count){
   r = rand() % (count);
   for(y=0;y<size;y++) {    
