@@ -39,6 +39,7 @@ int tilt_line_right(int length,int *line){
 
   // slide tiles to the right
   int i,j,shift;
+  int merged=0;
   for (i=length-1;i>=0;i--){
     shift=0;
     if(!line[i]){
@@ -53,10 +54,11 @@ int tilt_line_right(int length,int *line){
     }
   // combine tiles as required
     if(shift) i++;
-    if(line[i]==line[i-1]){
+    if(line[i]==line[i-1]&&!merged){
       line[i]=2*line[i];
       line[i-1]=0;
-    }
+      merged=1;
+    } else merged=0;
     if(shift) i--;
   } 
   return 0;
