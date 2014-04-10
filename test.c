@@ -37,6 +37,36 @@ int ttr_vector(int i1,int i2,int i3,int i4,char *msg,
   return line_vector_test("right",i1,i2,i3,i4,msg,o1,o2,o3,o4,tilt_line_right);
 }
 
+int line_vector_test2(char *s1, int i1,int i2,int i3,int i4,
+                int o1, int (*func)(int,int *))
+{
+  int list[4]={i1,i2,i3,i4};
+    printf("Tilting {%d,%d,%d,%d} %s returns %d - ",
+             i1,i2,i3,i4,s1,o1);
+  fflush(stdout);
+  int o2 =func(4,list);
+  if (o2!=o1)
+    {
+      printf("FAILED:\n {%d,%d,%d,%d} returns %d instead of"
+             " %d \n",
+             i1,i2,i3,i4,o2,o1);
+      return -1;
+    } 
+  printf("PASSED.\n");
+  return 0;
+}
+
+int ttl_vector2(int i1,int i2,int i3,int i4,
+               int o1)
+{
+  return line_vector_test2("left",i1,i2,i3,i4,o1,tilt_line_left);
+}
+int ttr_vector2(int i1,int i2,int i3,int i4,
+               int o1)
+{
+  return line_vector_test2("right",i1,i2,i3,i4,o1,tilt_line_right);
+}
+
 int test_tilt_left()
 {
   int e=0;
@@ -113,7 +143,7 @@ int test_final_board()
   int **board=board_create(board_size);
 board_spawn_tile(board_size,board);
 board_spawn_tile(board_size,board);
-  while(empty(board_size,board)||!board_tiltable(board_size, board)){
+  while(empty(board_size,board)||board_tiltable(board_size, board)){
       board=board_flip(board,board_size);
       for(i=0;i<board_size;i++) tilt_line_left(board_size,board[i]);
       board=board_flip(board,board_size);
@@ -132,6 +162,26 @@ board_spawn_tile(board_size,board);
   return 0;
 }
 
+int test_tilted_right(){
+  int e=0;
+  e|=ttr_vector2(0,1,1,0,1);
+  e|=ttr_vector2(2,1,0,0,1);
+  e|=ttr_vector2(2,2,0,0,1);
+  e|=ttr_vector2(0,0,0,0,0);
+  e|=ttr_vector2(8,4,2,1,0);
+  e|=ttr_vector2(0,0,2,1,0);
+  return e;
+}
+int test_tilted_left(){
+  int e=0;
+  e|=ttl_vector2(0,1,1,0,1);
+  e|=ttl_vector2(2,1,0,0,0);
+  e|=ttl_vector2(2,2,0,0,1);
+  e|=ttl_vector2(0,0,0,0,0);
+  e|=ttl_vector2(8,4,2,1,0);
+  e|=ttl_vector2(0,0,2,1,1);
+  return e;
+}
 int main(int argc,char **argv)
 {
   int e=0;
@@ -139,6 +189,10 @@ int main(int argc,char **argv)
   e|=test_tilt_left();
   printf("\nRight tilting:\n");
   e|=test_tilt_right();
+  printf("\nRight tilted:\n");
+  e|=test_tilted_right();
+  printf("Left tilted:\n");
+  e|=test_tilted_left();
   e|=test_final_board();
   e|=test_board_spawn();
   e|=test_board_tilt();
