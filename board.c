@@ -85,7 +85,7 @@ int board_spawn_tile(int size,int **board){
   return 0;
 }
 
-int board_moveable(int board_size, int** board){
+int board_tiltable(int board_size, int** board){
   int i,x,y;
   int different=0;
       int **board_test_l=board_clone(board_size,board);
