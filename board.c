@@ -82,6 +82,38 @@ int board_spawn_tile(int size,int **board){
     }
   }
 }
-
   return 0;
+}
+
+int board_moveable(int board_size, int** board){
+  int i,x,y;
+  int different=0;
+      int **board_test_l=board_clone(board_size,board);
+      board_test_l=board_flip(board_test_l,board_size);
+
+      for(i=0;i<board_size;i++) tilt_line_left(board_size,board_test_l[i]);
+      board_test_l=board_flip(board_test_l,board_size);
+      
+      int **board_test_u=board_clone(board_size,board);
+
+      for(i=0;i<board_size;i++) tilt_line_left(board_size,board_test_u[i]);
+      for(x=0;x<board_size;x++){
+        for(y=0;y<board_size;y++){
+          if(board[x][y]!=board_test_u[x][y]||board[x][y]!=board_test_l[x][y]) {different++;x=board_size;y=board_size;}
+        }
+      }
+      if(!different) {return 0;}
+    
+    return 1;
+}
+
+int** board_clone(int board_size, int** board){
+  int**board2=board_create(board_size);
+  int x,y;
+  for (x=0;x<board_size;x++){
+    for(y=0;y<board_size;y++){
+      board2[x][y]=board[x][y];
+    }
+  }
+  return board2;
 }
