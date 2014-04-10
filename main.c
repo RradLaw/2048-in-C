@@ -21,6 +21,12 @@ board_spawn_tile(board_size,board);
 board_spawn_tile(board_size,board);
   while(1) {
     board_display(board_size,board);
+    if(!empty(board_size,board)){
+			if(!board_moveable(board_size, board)){
+        printf("Game over. No more moves.\n");
+        exit(0);
+        }
+    }
     printf("Next move? "); fflush(stdout);
     int action=read_input();
     switch(action) {
