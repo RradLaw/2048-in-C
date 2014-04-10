@@ -113,7 +113,7 @@ int test_final_board()
   int **board=board_create(board_size);
 board_spawn_tile(board_size,board);
 board_spawn_tile(board_size,board);
-  while(empty(board_size,board)){
+  while(empty(board_size,board)||!board_tiltable(board_size, board)){
       board=board_flip(board,board_size);
       for(i=0;i<board_size;i++) tilt_line_left(board_size,board[i]);
       board=board_flip(board,board_size);
@@ -127,6 +127,7 @@ board_spawn_tile(board_size,board);
       for(i=0;i<board_size;i++) tilt_line_right(board_size,board[i]);
       board_spawn_tile(board_size,board);
   }
+  printf("Final board:\n");
   board_display(4,board);
   return 0;
 }
@@ -139,7 +140,7 @@ int main(int argc,char **argv)
   printf("\nRight tilting:\n");
   e|=test_tilt_right();
   e|=test_final_board();
-  //e|=test_board_spawn();
-  //e|=test_board_tilt();
+  e|=test_board_spawn();
+  e|=test_board_tilt();
   return e;
 }
