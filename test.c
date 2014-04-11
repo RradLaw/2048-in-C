@@ -66,6 +66,21 @@ int ttr_vector2(int i1,int i2,int i3,int i4,
 {
   return line_vector_test2("right",i1,i2,i3,i4,o1,tilt_line_right);
 }
+int te_vector(int** i1,int o1,char* s1){
+    printf("Tilting %s board returns %d - ",
+             s1,o1);
+  fflush(stdout);
+  int o2 = empty(4, i1);
+  if (o2!=o1)
+    {
+      printf("FAILED:\n %s array returns %d instead of"
+             " %d \n",
+             s1,o2,o1);
+      return -1;
+    } 
+  printf("PASSED.\n");
+  return 0;
+}
 
 int test_tilt_left()
 {
@@ -81,6 +96,7 @@ int test_tilt_left()
   e|=ttl_vector(2,0,1,1,NULL,2,2,0,0);
   e|=ttl_vector(2,1,1,0,NULL,2,2,0,0);
   e|=ttl_vector(1,1,2,0,NULL,2,2,0,0);
+  e|=ttl_vector(0,2,2,1,NULL,4,1,0,0);
   return e;
 }
 
@@ -97,6 +113,7 @@ int test_tilt_right()
   e|=ttr_vector(1,1,0,4,NULL,0,0,2,4);
   e|=ttr_vector(1,1,0,2,NULL,0,0,2,2);
   e|=ttr_vector(0,2,1,1,NULL,0,0,2,2);
+  e|=ttr_vector(1,2,2,0,NULL,0,0,1,4);
   return e;
 }
 
@@ -105,14 +122,18 @@ int test_board_spawn()
   int e =0;
   int board_size=4;
   int **board=board_create(board_size);
-  printf("Spawn 1: \n");
   e|= board_spawn_tile(board_size,board);
+  e|= board_spawn_tile(board_size,board);
+  e|= board_spawn_tile(board_size,board);
+  printf("3 spawns: \n");
   board_display(board_size,board);
-  printf("spawn 2: \n");
   e|= board_spawn_tile(board_size,board);
-  board_display(board_size,board);
-  printf("spawn 3: \n");
   e|= board_spawn_tile(board_size,board);
+  e|= board_spawn_tile(board_size,board);
+  e|= board_spawn_tile(board_size,board);
+  e|= board_spawn_tile(board_size,board);
+  e|= board_spawn_tile(board_size,board);
+  printf("9 spawns: \n");
   board_display(board_size,board);
   return e;
 }
@@ -180,6 +201,14 @@ int test_tilted_left(){
   e|=ttl_vector2(0,0,0,0,0);
   e|=ttl_vector2(8,4,2,1,0);
   e|=ttl_vector2(0,0,2,1,1);
+  return e;
+}
+int test_empty(){
+  int e=0;
+  //e|=te_vector({{0,2,1,0},{0,2,4,1},{0,0,0,1},{0,0,0,0}},6," semi full ");//{{a}} returns error.
+  //e|=te_vector({{1,8,1,0},{0,2,2,0},{0,4,0,2},{0,4,16,0}},9," semi full ");
+  //e|=te_vector({{1,8,1,1},{8,2,2,32},{128,4,0,2},{2,4,16,1}},16," full ");
+  //e|=te_vector({{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},0," empty ");
   return e;
 }
 int main(int argc,char **argv)
