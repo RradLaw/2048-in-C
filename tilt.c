@@ -31,7 +31,6 @@ int tilt_line_left(int length,int *line)
       merged=1;
       tilted=1;
     }else merged=0;
-    if(shift) i++;
   } 
   return tilted;//not working
 }
@@ -65,7 +64,6 @@ int tilt_line_right(int length,int *line){
       merged=1;
       tilted=1;
     } else merged=0;
-    if(shift) i--;
   } 
   return tilted;
 }
