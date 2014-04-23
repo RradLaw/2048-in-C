@@ -67,7 +67,7 @@ int ttr_vector2(int i1,int i2,int i3,int i4,
   return line_vector_test2("right",i1,i2,i3,i4,o1,tilt_line_right);
 }
 int te_vector(int** i1,int o1,char* s1){
-    printf("Tilting %s board returns %d - ",
+    printf("Tilting %s board returns %d empty tiles- ",
              s1,o1);
   fflush(stdout);
   int o2 = empty(4, i1);
@@ -205,10 +205,28 @@ int test_tilted_left(){
 }
 int test_empty(){
   int e=0;
-  //e|=te_vector({{0,2,1,0},{0,2,4,1},{0,0,0,1},{0,0,0,0}},6," semi full ");//{{a}} returns error.
-  //e|=te_vector({{1,8,1,0},{0,2,2,0},{0,4,0,2},{0,4,16,0}},9," semi full ");
-  //e|=te_vector({{1,8,1,1},{8,2,2,32},{128,4,0,2},{2,4,16,1}},16," full ");
-  //e|=te_vector({{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},0," empty ");
+  int a1[4][4] ={{0,2,1,0},{0,2,4,1},{0,0,0,1},{0,0,0,0}};
+  int* foo[4];
+  int i;
+  for (i=0;i<4;++i)
+    foo[i]=a1[i];
+  int ** bar = foo;
+  e|=te_vector(bar,10," semi full ");
+  int a2[4][4] ={{1,8,1,0},{0,2,2,0},{0,4,0,2},{0,4,16,0}};
+  for (i=0;i<4;++i)
+    foo[i]=a2[i];
+  bar = foo;
+  e|=te_vector(bar,7," semi full ");
+  int a3[4][4] ={{1,8,1,1},{8,2,2,32},{128,4,0,2},{2,4,16,1}};
+  for (i=0;i<4;++i)
+    foo[i]=a3[i];
+  bar = foo;
+  e|=te_vector(bar,1," full ");
+  int a4[4][4] ={{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+  for (i=0;i<4;++i)
+    foo[i]=a4[i];
+  bar = foo;
+  e|=te_vector(bar,16," empty ");
   return e;
 }
 int main(int argc,char **argv)
@@ -225,5 +243,6 @@ int main(int argc,char **argv)
   e|=test_final_board();
   e|=test_board_spawn();
   e|=test_board_tilt();
+  e|=test_empty();
   return e;
 }
