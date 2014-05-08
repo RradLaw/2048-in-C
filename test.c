@@ -114,6 +114,7 @@ int test_tilt_right()
   e|=ttr_vector(1,1,0,2,NULL,0,0,2,2);
   e|=ttr_vector(0,2,1,1,NULL,0,0,2,2);
   e|=ttr_vector(1,2,2,0,NULL,0,0,1,4);
+  e|=ttr_vector(2,1,0,1,NULL,0,0,2,2);
   return e;
 }
 
