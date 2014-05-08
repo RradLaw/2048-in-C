@@ -81,7 +81,22 @@ int te_vector(int** i1,int o1,char* s1){
   printf("PASSED.\n");
   return 0;
 }
-
+int tt_vector(int i1,int i2,int i3, int i4,int o1,int (*func)(int,int *)){
+  int list[4]={i1,i2,i3,i4};
+    printf("Tilting {%d,%d,%d,%d} returns tilted=%d - ",
+             i1,i2,i3,i4,o1);
+  fflush(stdout);
+  int o2 = func(4, list);
+  if (o2!=o1)
+    {
+      printf("FAILED:\n {%d,%d,%d,%d} returns tilted=%d instead of"
+             " %d \n",
+             i1,i2,i3,i4,o2,o1);
+      return -1;
+    } 
+  printf("PASSED.\n");
+  return 0;
+}
 int test_tilt_left()
 {
   int e=0;
@@ -204,6 +219,18 @@ int test_tilted_left(){
   e|=ttl_vector2(0,0,2,1,1);
   return e;
 }
+int test_tilted(){
+  int e=0;
+  e|=tt_vector(1,0,0,0 ,0,tilt_line_left);
+  e|=tt_vector(1,0,0,0 ,1,tilt_line_right);
+  e|=tt_vector(1,0,0,1 ,1,tilt_line_left);
+  e|=tt_vector(1,0,0,1 ,1,tilt_line_right);
+  e|=tt_vector(0,0,0,1 ,1,tilt_line_left);
+  e|=tt_vector(0,0,0,1 ,0,tilt_line_right);
+  e|=tt_vector(0,1,0,0 ,1,tilt_line_right);
+  e|=tt_vector(0,1,0,0 ,1,tilt_line_left);
+  return e;
+}
 int test_empty(){
   int e=0;
   int a1[4][4] ={{0,2,1,0},{0,2,4,1},{0,0,0,1},{0,0,0,0}};
@@ -245,5 +272,6 @@ int main(int argc,char **argv)
   e|=test_board_spawn();
   e|=test_board_tilt();
   e|=test_empty();
+  e|=test_tilted();
   return e;
 }
