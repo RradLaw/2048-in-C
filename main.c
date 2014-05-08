@@ -28,28 +28,27 @@ board_spawn_tile(board_size,board);
         exit(0);
         }
     }
-    tilted=0;
     printf("Next move? "); fflush(stdout);
     int action=read_input();
     switch(action) {
     case GO_LEFT:
       board=board_flip(board,board_size);
-      for(i=0;i<board_size;i++) tilted|=tilt_line_left(board_size,board[i]);
+      for(i=0;i<board_size;i++) tilted=tilt_line_left(board_size,board[i]);
       board=board_flip(board,board_size);
       if(tilted)board_spawn_tile(board_size,board);
       break;
     case GO_RIGHT:
       board=board_flip(board,board_size);
-      for(i=0;i<board_size;i++) tilted|=tilt_line_right(board_size,board[i]);
+      for(i=0;i<board_size;i++) tilted=tilt_line_right(board_size,board[i]);
       board=board_flip(board,board_size);
       if(tilted)board_spawn_tile(board_size,board);
       break;
     case GO_UP:
-      for(i=0;i<board_size;i++) tilted|=tilt_line_left(board_size,board[i]);
+      for(i=0;i<board_size;i++) tilted=tilt_line_left(board_size,board[i]);
       if(tilted)board_spawn_tile(board_size,board);
       break;
     case GO_DOWN:
-      for(i=0;i<board_size;i++) tilted|=tilt_line_right(board_size,board[i]);
+      for(i=0;i<board_size;i++) tilted=tilt_line_right(board_size,board[i]);
       if(tilted)board_spawn_tile(board_size,board);
       break;
     case GO_NOWHERE:
