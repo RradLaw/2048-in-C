@@ -32,7 +32,7 @@ int tilt_line_left(int length,int *line)
       tilted=1;
     }else merged=0;
   } 
-  return tilted;//not working
+  return tilted;
 }
 
 int tilt_line_right(int length,int *line){
