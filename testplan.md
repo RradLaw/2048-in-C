@@ -44,11 +44,11 @@ This test plan is split into a number of sections. Section 2 refers to all relev
 * Test log
 
 ## 6. Risks and dependencies:
-*Risks
+* Risks
 	* Misunderstanding of the 2048 rules
 	* Tests not sufficient
 	* Tests written incorrectly 
-*Dependencies
+* Dependencies
 	* Understanding of the 2048 game, and its rules
 	* Knowledge of C, the language of the program
 	* System with the ability to conduct test
