@@ -2,12 +2,14 @@
 ## 1. Introduction
 This document provides the testing needed for the 2048 game. The main function of this program is to have a board of tiles, with numbers in them. When the board is tilted, these tiles move in the direction of the tile, merging into a larger number if two identical numbers collide.
 This test plan is split into a number of sections. Section 2 refers to all relevant testing conducted in this test plan. Section 3 specifies what needs to be tested, and the outcome of the test. Section 4 outlines what is not needed to be tested. Section 5 shows the documentation produced by the program and testing. Finally, section 6 shows what risks are involved in this testing, and what the testing is dependent on.
+
 ## 2. Test types to consider
 * Unit testing
 * White box testing
 * Regression testing
 * Blackbox testing
 * Integration testing
+
 ## 3. What to test:
 * Initialisation
 	* Initial empty 4x4 board
@@ -35,10 +37,12 @@ This test plan is split into a number of sections. Section 2 refers to all relev
 	* Large number of input sent in a small space of time should function
 * Compatibility
 	* Program works perfectly with every single platform
+
 ## 5. Documentation produced:
 * Software documentation
 * Commits
 * Test log
+
 ## 6. Risks and dependencies:
 *Risks
 	* Misunderstanding of the 2048 rules
