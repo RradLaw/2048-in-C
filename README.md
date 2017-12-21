@@ -1,4 +1,3 @@
-se3prac3
+2048 in C
 ========
-
-Skeleton for SE3 Prac 3: Implementing the 2048 game.
+Code for yet another 2048 clone.
